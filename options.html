@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>PA Flow Search — Settings</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 14px;
+      color: #111827;
+      max-width: 520px;
+      margin: 40px auto;
+      padding: 0 24px 60px;
+    }
+    h1 { font-size: 20px; font-weight: 700; margin-bottom: 28px; color: #0f6cbd; }
+    h2 { font-size: 14px; font-weight: 700; margin-bottom: 12px; color: #111827; }
+    label { display: block; font-size: 12px; font-weight: 600; color: #374151; margin-bottom: 4px; }
+    input[type="text"] {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 13px;
+      margin-bottom: 16px;
+      outline: none;
+      font-family: monospace;
+    }
+    input[type="text"]:focus { border-color: #0f6cbd; box-shadow: 0 0 0 2px rgba(15,108,189,0.15); }
+    .code-box {
+      background: #f5f6f8;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-family: monospace;
+      font-size: 12px;
+      word-break: break-all;
+      color: #374151;
+      margin-bottom: 8px;
+    }
+    .copy-btn {
+      background: none;
+      border: 1px solid #d1d5db;
+      border-radius: 5px;
+      padding: 4px 10px;
+      font-size: 11px;
+      cursor: pointer;
+      color: #6b7280;
+      margin-bottom: 16px;
+    }
+    .copy-btn:hover { border-color: #0f6cbd; color: #0f6cbd; }
+    .save-row { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; }
+    .save-btn {
+      background: #0f6cbd;
+      color: #fff;
+      border: none;
+      padding: 9px 20px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .save-btn:hover { background: #0d5fa3; }
+    #saved-msg { font-size: 13px; color: #15803d; }
+    #error-msg { font-size: 13px; color: #b91c1c; }
+    hr { border: none; border-top: 1px solid #e5e7eb; margin: 28px 0; }
+    ol { padding-left: 20px; line-height: 2; font-size: 13px; color: #374151; }
+    a { color: #0f6cbd; }
+    .note {
+      background: #eff6ff;
+      border-left: 3px solid #0f6cbd;
+      border-radius: 0 6px 6px 0;
+      padding: 10px 14px;
+      font-size: 12px;
+      color: #1e40af;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    code { font-family: monospace; font-size: 12px; background: #f3f4f6; padding: 1px 5px; border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+  <h1>&#9889; PA Flow Search — Settings</h1>
+
+  <h2>Azure AD Configuration</h2>
+
+  <label for="tenant-id">Tenant ID</label>
+  <input type="text" id="tenant-id" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" />
+
+  <label for="client-id">Application (Client) ID</label>
+  <input type="text" id="client-id" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" />
+
+  <div class="save-row">
+    <button class="save-btn" id="save-btn">Save</button>
+    <span id="saved-msg"></span>
+    <span id="error-msg"></span>
+  </div>
+
+  <hr>
+
+  <h2>Redirect URI</h2>
+  <p style="font-size:12px;color:#6b7280;margin-bottom:8px;">
+    Add this exact URI to your Azure AD app registration under
+    <strong>Authentication &rarr; Single-page application (SPA)</strong>:
+  </p>
+  <div class="code-box" id="redirect-uri">Loading&hellip;</div>
+  <button class="copy-btn" id="copy-btn">Copy URI</button>
+
+  <hr>
+
+  <h2>Azure AD Setup Checklist</h2>
+
+  <div class="note">
+    Your app registration needs the <strong>Power Automate Service</strong> API permission
+    <code>Flows.Read.All</code> (delegated). An admin may need to grant consent for the org.
+  </div>
+
+  <ol>
+    <li>Go to <a href="https://portal.azure.com" target="_blank">portal.azure.com</a>
+      &rarr; Azure Active Directory &rarr; App registrations</li>
+    <li>Open your app registration (or create a new one)</li>
+    <li>Go to <strong>Authentication</strong> &rarr; Add a platform
+      &rarr; <strong>Single-page application (SPA)</strong></li>
+    <li>Paste the Redirect URI above and save
+      <br><em style="font-size:11px;color:#6b7280;">Important: must be SPA, not "Mobile and desktop" — PKCE requires it</em></li>
+    <li>Go to <strong>API permissions</strong> &rarr; Add a permission
+      &rarr; <strong>APIs my organization uses</strong> &rarr; search <em>Power Automate</em></li>
+    <li>Select <strong>Flows.Read.All</strong> (delegated) and add it</li>
+    <li>If required by your org, click <strong>Grant admin consent</strong></li>
+    <li>Copy the <strong>Application ID</strong> and <strong>Directory (tenant) ID</strong>
+      from the Overview page and paste them above</li>
+  </ol>
+
+  <script src="options.js"></script>
+</body>
+</html>

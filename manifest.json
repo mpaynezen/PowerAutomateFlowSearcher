@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Power Automate Flow Search",
+  "version": "1.0.0",
+  "description": "Search your org's Power Automate flows by name, connector, or action",
+  "permissions": ["identity", "storage", "tabs"],
+  "host_permissions": [
+    "https://api.flow.microsoft.com/*",
+    "https://login.microsoftonline.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "PA Flow Search"
+  },
+  "options_page": "options.html",
+  "background": {
+    "service_worker": "background.js"
+  }
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>PA Flow Search</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="header">
+    <div class="title-row">
+      <span class="title">&#9889; PA Flow Search</span>
+      <div class="header-actions">
+        <button id="refresh-btn" class="icon-btn" title="Refresh flows">&#8635;</button>
+        <button id="settings-btn" class="icon-btn" title="Settings">&#9881;</button>
+      </div>
+    </div>
+    <div class="search-row">
+      <input type="text" id="search-input" placeholder="Search flows..." autocomplete="off" spellcheck="false" />
+    </div>
+    <div class="filter-row">
+      <span class="filter-label">In:</span>
+      <button class="filter-btn active" data-filter="name">Name</button>
+      <button class="filter-btn active" data-filter="connector">Connector</button>
+      <button class="filter-btn active" data-filter="action">Action</button>
+    </div>
+  </div>
+
+  <div id="status-bar" class="status-bar hidden"></div>
+
+  <div id="error-box" class="error-box hidden">
+    <div class="error-header">
+      <span>Error</span>
+      <button id="dismiss-error" class="error-dismiss">&times;</button>
+    </div>
+    <pre id="error-text" class="error-text"></pre>
+  </div>
+
+  <div id="main">
+    <div id="auth-section" class="section hidden">
+      <div class="centered">
+        <p class="hint">Sign in to load your Power Automate flows.</p>
+        <button id="sign-in-btn" class="primary-btn">Sign in with Microsoft</button>
+        <p class="hint small">
+          Need to configure Azure AD first?
+          <a id="settings-link" href="#">Open Settings</a>
+        </p>
+      </div>
+    </div>
+
+    <div id="loading-section" class="section hidden">
+      <div class="centered">
+        <div class="spinner"></div>
+        <p id="loading-text" class="hint">Loading flows&hellip;</p>
+      </div>
+    </div>
+
+    <div id="results-section" class="hidden">
+      <div id="results-meta" class="results-meta"></div>
+      <div id="results-list"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span id="last-updated" class="muted"></span>
+    <button id="sign-out-btn" class="text-btn">Sign out</button>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
